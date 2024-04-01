@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="mainColor">#053F5C</color>
+    <color name="progressBarColor">@color/coffeetype</color>
+    <color name="black">#FF000000</color>
+    <color name="lightblack">#83000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="lightgreen">#DCEDF9</color>
+    <color name="red">#FF0000</color>
+    <color name="orange">#F84D09</color>
+    <color name="yellowtype">#FCEE21</color>
+    <color name="greentype">#009245</color>
+    <color name="cyanlight">#3FCF94</color>
+    <color name="coffeetype">#D2C76A</color>
+    <color name="darkblue">#003F7D</color>
+    <color name="prusianblue">#053F5C</color>
+    <color name="transparent">#00000000</color>
+    <color name="grey">#50FFFFFF</color>
+    <color name="dialogBackground">#60000000</color>
+
+    <color name="appBarImage">@color/black</color>
+
+    <color name="passwordFormatBackground">#E4E4E4</color>
+
+    <color name="loginSubHeadText">#83000000</color>
+
+    <color name="loginHeadText">@color/prusianblue</color>
+
+    <color name="splashText">@color/prusianblue</color>
+
+    <color name="textBoxText">@color/prusianblue</color>
+
+    <color name="helperText">@color/prusianblue</color>
+
+    <color name="textBoxHeading">@color/prusianblue</color>
+
+    <color name="signOutDevicesFragment">#AFAFAF</color>
+</resources>

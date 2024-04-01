@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home_activity"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.meditrack.homeActivity.home.HomeFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_OCRFragment"
+            app:destination="@id/OCRFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addMedicineFragment2"
+            app:destination="@id/addMedicineFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_medicineStockFragment"
+            app:destination="@id/medicineStockFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_scanPrescriptionFragment"
+            app:destination="@id/scanPrescriptionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_devicesFragment"
+            app:destination="@id/devicesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.meditrack.homeActivity.search.SearchFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/OCRFragment"
+        android:name="com.example.meditrack.homeActivity.ocr.OCRFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_o_c_r" />
+    <fragment
+        android:id="@+id/addMedicineFragment"
+        android:name="com.example.meditrack.homeActivity.medicine.addMedicine.AddMedicineFragment"
+        android:label="fragment_add_medicine"
+        tools:layout="@layout/fragment_add_medicine" />
+    <fragment
+        android:id="@+id/medicineStockFragment"
+        android:name="com.example.meditrack.homeActivity.medicine.medicineStock.MedicineStockFragment"
+        android:label="fragment_medicine_stock"
+        tools:layout="@layout/fragment_medicine_stock" />
+    <fragment
+        android:id="@+id/scanPrescriptionFragment"
+        android:name="com.example.meditrack.homeActivity.prescription.scan_prescription.ScanPrescriptionFragment"
+        android:label="fragment_scan_prescription"
+        tools:layout="@layout/fragment_scan_prescription" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.meditrack.homeActivity.reminder.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.meditrack.homeActivity.userprofile.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_updateProfileImageFragment"
+            app:destination="@id/updateProfileImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.meditrack.homeActivity.about.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/updateProfileImageFragment"
+        android:name="com.example.meditrack.homeActivity.userprofile.updateprofileimage.UpdateProfileImageFragment"
+        android:label="fragment_update_profile_image"
+        tools:layout="@layout/fragment_update_profile_image" />
+    <fragment
+        android:id="@+id/devicesFragment"
+        android:name="com.example.meditrack.homeActivity.devices.DevicesFragment"
+        android:label="fragment_devices"
+        tools:layout="@layout/fragment_devices" />
+</navigation>

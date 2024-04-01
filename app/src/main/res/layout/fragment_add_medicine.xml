@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/add_medicine_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".homeActivity.medicine.addMedicine.AddMedicineFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/top_right_shape"
+                android:src="@drawable/shape"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="-40dp"
+                android:layout_marginEnd="-40dp"/>
+            <ImageView
+                android:id="@+id/fragment_login_top_shape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/top_right_shape"
+                android:src="@drawable/shape2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="-10dp"
+                android:layout_marginEnd="-70dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginHorizontal="20dp"
+                        android:text="@string/addmedicine"
+                        android:textSize="@dimen/_25sdp"
+                        android:fontFamily="@font/comfortaa_bold"
+                        style="@style/LoginHead"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:text="@string/fragment_addmedicine_subtitle"
+                        android:textSize="@dimen/_10sdp"
+                        android:fontFamily="@font/comfortaa_regular"
+                        style="@style/LoginSubHead"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/profile_image_layout"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/circle_image">
+                    <ImageView
+                        android:id="@+id/medicine_image"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:src="@drawable/round_medication_24"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="@string/add_medicine_image" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="20dp"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="10dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/fragment_medicine_name_TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:helperTextEnabled="true"
+                        app:helperText="Required"
+                        style="@style/normalTextBox">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/fragment_medicine_name_TextInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableStart="@drawable/ic_capulase"
+                            android:drawablePadding="10dp"
+                            style="@style/FormTextBox"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:hint="@string/medicinename"
+                            android:inputType="textEmailAddress"
+                            android:padding="10dp"
+                            android:textSize="@dimen/_10sdp" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnCorrectSpell"
+                            android:text="Correct Spell"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="10dp"
+                            style="@style/GeneralUsedButton"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Type *"
+                                style="@style/TextBoxHeading"/>
+                            <ImageView
+                                android:id="@+id/medTypeInfo"
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                android:src="@drawable/ic_info"
+                                app:tint="#D2C76A"/>
+                        </LinearLayout>
+
+
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/medTypeChipGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:singleSelection="true"
+                            />
+
+
+                    </LinearLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/fragment_dosage_info_TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:helperTextEnabled="true"
+                        app:helperText="Required"
+                        style="@style/normalTextBox">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/fragment_dosage_info_TextInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:drawableStart="@drawable/dropper_dosage_svgrepo_com"
+                            android:drawablePadding="10dp"
+                            style="@style/FormTextBox"
+                            android:fontFamily="@font/comfortaa_regular"
+                            android:hint="@string/dosageinfo"
+                            android:inputType="numberDecimal"
+                            android:padding="10dp"
+                            android:textSize="@dimen/_10sdp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!--            <TextView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:text="Email:"-->
+                    <!--                android:textSize="18dp"-->
+                    <!--                android:textColor="@color/black"/>-->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:baselineAligned="false">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/fragment_medicine_startdate_TextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/normalTextBox"
+                            app:helperTextEnabled="true"
+                            app:helperText="Required"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_weight="1">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/fragment_medicine_startdate_TextInputEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:drawableStart="@drawable/round_date_range_24"
+                                android:drawablePadding="10dp"
+                                style="@style/FormTextBox"
+                                android:fontFamily="@font/comfortaa_regular"
+                                android:hint="@string/medicinemfgdate"
+                                android:inputType="none"
+                                android:focusable="false"
+                                android:clickable="true"
+                                android:padding="10dp"
+                                android:textSize="@dimen/_10sdp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/fragment_medicine_expirydate_TextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            app:helperTextEnabled="true"
+                            app:helperText="Required"
+                            style="@style/normalTextBox"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_weight="1">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/fragment_medicine_expirydate_TextInputEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:drawableStart="@drawable/round_date_range_24"
+                                android:drawablePadding="10dp"
+                                style="@style/FormTextBox"
+                                android:fontFamily="@font/comfortaa_regular"
+                                android:hint="@string/medicineexpirydate"
+                                android:inputType="none"
+                                android:focusable="false"
+                                android:clickable="true"
+                                android:padding="10dp"
+                                android:textSize="@dimen/_10sdp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <!--            <TextView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:text="Mobile No.:"-->
+                    <!--                android:textSize="18dp"-->
+                    <!--                android:textColor="@color/black"-->
+                    <!--                android:layout_marginTop="10dp"/>-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/frequency"
+                            style="@style/TextBoxHeading" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/freqChipGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:singleSelection="true"
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/weekDaysChipGroupLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Week Day *"
+                            style="@style/TextBoxHeading"/>
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/weekDaysChipGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+                    </LinearLayout>
+
+                    <!--<com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/fragment_week_days_TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        app:helperTextEnabled="true"
+                        app:helperText="Required"
+                        android:visibility="gone"
+                        app:helperTextTextColor="@color/prusianblue">
+                            <AutoCompleteTextView-->
+<!--                            android:id="@+id/fragment_week_days_TextInputEditText"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:drawableStart="@drawable/round_date_range_24"-->
+<!--                            android:drawablePadding="10dp"-->
+<!--                            android:fontFamily="@font/comfortaa_regular"-->
+<!--                            android:hint="Select Day"-->
+<!--                            android:inputType="none"-->
+<!--                            android:textColor="@color/prusianblue"-->
+<!--                            android:padding="10dp"-->
+<!--                            android:textSize="@dimen/_10sdp"-->
+<!--                            />-->
+<!--                        <com.google.android.material.chip.ChipInputLayout-->
+<!--                            android:id="@+id/fragment_week_days_TextInputEditText"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content" />-->
+<!--                    </com.google.android.material.textfield.TextInputLayout>&ndash;&gt;-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/administrationtime"
+                            style="@style/TextBoxHeading"/>
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/breakFastChipGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:singleSelection="true"
+                            />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/launchChipGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:singleSelection="true"
+                            />
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/dinnerChipGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:singleSelection="true"
+                            />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/medicineTimeofDayType2ChipGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            />
+
+                    </LinearLayout>
+
+
+                    <!--<com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/fragment_administration_time_TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:helperTextEnabled="true"
+                        app:helperText="Required"
+                        app:helperTextTextColor="@color/prusianblue"
+                        android:layout_marginTop="@dimen/_3sdp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/fragment_administration_time_TextInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/administrationtime"
+                            android:textColor="@color/prusianblue"
+                            android:drawableStart="@drawable/round_access_time_24"
+                            android:drawableTint="@color/prusianblue"
+                            android:drawablePadding="10dp"
+                            android:textSize="@dimen/_10sdp"
+                            android:padding="10dp"
+                            android:inputType="text"
+                            android:fontFamily="@font/comfortaa_regular"/>
+                    </com.google.android.material.textfield.TextInputLayout>-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/additional_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/Base.CardView"
+                            android:backgroundTint="@color/transparent"
+                            app:cardElevation="0dp">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintVertical_bias="0.511"
+                                tools:layout_editor_absoluteX="-55dp"
+                                android:orientation="vertical">
+                                <LinearLayout
+                                    android:id="@+id/fixed_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/additionaldetailtext"
+                                        android:fontFamily="@font/comfortaa_bold"
+                                        style="@style/TextBoxHeading"/>
+                                    <ImageButton
+                                        android:id="@+id/arrow_button"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/round_keyboard_arrow_down_24"
+                                        android:background="@color/transparent"
+                                        style="@style/AdditionalDetailsDownArrow"
+                                        android:layout_gravity="end|center_vertical"/>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:id="@+id/hidden_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="gone"
+                                    >
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/fragment_special_instruction_TextInputLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:helperTextEnabled="true"
+                                        style="@style/normalTextBox"
+                                        android:layout_marginTop="@dimen/_3sdp">
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/fragment_special_instruction_TextInputEditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="@string/specialinstruction"
+                                            android:drawableStart="@drawable/ic_add_medicine"
+                                            style="@style/FormTextBox"
+                                            android:drawablePadding="10dp"
+                                            android:textSize="@dimen/_10sdp"
+                                            android:padding="10dp"
+                                            android:inputType="text"
+                                            android:fontFamily="@font/comfortaa_regular"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/fragment_doctor_name_TextInputLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        style="@style/normalTextBox"
+                                        app:helperTextEnabled="true"
+                                        android:layout_marginTop="@dimen/_3sdp">
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/fragment_doctor_name_TextInputEditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="@string/doctorinfo"
+                                            android:drawableStart="@drawable/doctor_svgrepo_com"
+                                            style="@style/FormTextBox"
+                                            android:drawablePadding="10dp"
+                                            android:textSize="@dimen/_10sdp"
+                                            android:padding="10dp"
+                                            android:inputType="text"
+                                            android:fontFamily="@font/comfortaa_regular"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/fragment_doctor_contact_TextInputLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        style="@style/normalTextBox"
+                                        app:helperTextEnabled="true"
+                                        android:layout_marginTop="@dimen/_3sdp">
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/fragment_doctor_contact_TextInputEditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Doctor Contact"
+                                            android:drawableStart="@drawable/ic_contact"
+                                            style="@style/FormTextBox"
+                                            android:drawablePadding="10dp"
+                                            android:textSize="@dimen/_10sdp"
+                                            android:padding="10dp"
+                                            android:inputType="numberSigned"
+                                            android:fontFamily="@font/comfortaa_regular"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/fragment_notes_or_comments_TextInputLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:helperTextEnabled="true"
+                                        style="@style/normalTextBox"
+                                        android:layout_marginTop="@dimen/_3sdp">
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/fragment_notes_or_comments_TextInputEditText"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="@string/notesorcomments"
+                                            android:gravity="top"
+                                            android:drawableStart="@drawable/round_notes_24"
+                                            style="@style/FormTextBox"
+                                            android:drawablePadding="10dp"
+                                            android:textSize="@dimen/_10sdp"
+                                            android:padding="10dp"
+                                            android:lines="3"
+                                            android:maxLines="5"
+                                            android:minLines="3"
+                                            android:inputType="textMultiLine"
+                                            android:scrollbars="vertical"
+                                            android:fontFamily="@font/comfortaa_regular"/>
+                                    </com.google.android.material.textfield.TextInputLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/fragment_medicine_quantity_TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:helperTextEnabled="true"
+                        app:helperText="Required"
+                        style="@style/normalTextBox"
+                        android:layout_marginTop="@dimen/_12sdp">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/fragment_medicine_quantity_TextInputEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:hint="@string/medicinequantity"
+                            android:drawableStart="@drawable/ic_add_medicine"
+                            style="@style/FormTextBox"
+                            android:drawablePadding="10dp"
+                            android:textSize="@dimen/_10sdp"
+                            android:padding="10dp"
+                            android:inputType="numberDecimal"
+                            android:fontFamily="@font/comfortaa_regular"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+
+
+
+                    <!--            <com.google.android.material.button.MaterialButton-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="25dp"-->
+                    <!--                android:paddingVertical="0dp"-->
+                    <!--                android:layout_marginTop="10dp"-->
+                    <!--                android:layout_gravity="end"-->
+                    <!--                android:gravity="center_vertical"-->
+                    <!--                android:text="Get OTP"-->
+                    <!--                android:textSize="10dp"-->
+                    <!--                android:textColor="@color/greentype"-->
+                    <!--                app:backgroundTint="@null"-->
+                    <!--                android:background="@drawable/button_outlined"-->
+                    <!--                app:icon="@drawable/noun_otp_4051175"-->
+                    <!--                app:iconTint="@color/greentype"-->
+                    <!--                app:iconGravity="textStart"/>-->
+                    <!--            <TextView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:text="Enter OTP:"-->
+                    <!--                android:textSize="18dp"-->
+                    <!--                android:textColor="@color/black"-->
+                    <!--                android:layout_marginTop="15dp"/>-->
+                    <!--            <com.google.android.material.textfield.TextInputLayout-->
+                    <!--                android:layout_width="match_parent"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
+                    <!--                <com.google.android.material.textfield.TextInputEditText-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="match_parent"-->
+                    <!--                    android:hint="Enter OTP"-->
+                    <!--                    android:textColor="@color/prusianblue"-->
+                    <!--                    android:drawableLeft="@drawable/round_password_24"-->
+                    <!--                    android:drawablePadding="10dp"-->
+                    <!--                    android:maxLines="1"-->
+                    <!--                    android:singleLine="true"/>-->
+                    <!--            </com.google.android.material.textfield.TextInputLayout>-->
+                    <!--            <TextView-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:text="Resend OTP"-->
+                    <!--                android:textColor="@color/greentype"-->
+                    <!--                android:layout_marginTop="3dp"-->
+                    <!--                android:layout_marginLeft="5dp"/>-->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/fragment_medicine_add_button"
+                        android:layout_width="@dimen/_165sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:text="@string/addmedicinebtn"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@null"
+                        android:background="@drawable/button_background"
+                        app:icon="@drawable/round_add_circle_outline_24"
+                        app:iconGravity="textEnd"
+                        android:layout_gravity="end"
+                        android:fontFamily="@font/comfortaa_bold"
+                        app:iconTint="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

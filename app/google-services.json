@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "485209428499",
+    "project_id": "vitalitycs-new",
+    "storage_bucket": "vitalitycs-new.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485209428499:android:045a6b926e3d5a4d5e65e6",
+        "android_client_info": {
+          "package_name": "com.example.meditrack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFRjR5zO8k69jwiRt7a-UYMWjbOp4khOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
