@@ -181,77 +181,27 @@ class LoginFragment : Fragment() {
             }
 
             fragmentLoginButton.setOnClickListener {
-                if(fragmentLoginEmailTextInputLayout.helperText==null && fragmentLoginPasswordTextInputLayout.helperText==null && viewModel.inputEmail!=null && viewModel.inputPassword!=null)
-                {
-                    if (!requireContext().toCheckLocationAccess()){
-                        requireContext().requestPermissions(mutableListOf(android.Manifest.permission.ACCESS_FINE_LOCATION)){
-                            if(it)
-                            {
-                                if(!requireContext().isLocationEnabled()){
-                                    showLocationSettingsDialog(requireContext())
-                                    return@requestPermissions
-                                }
-                            }
-                            else{
-                                requireActivity().finishAffinity()
-                            }
-                        }
-                        return@setOnClickListener
-                    }
-                    else{
-                        if(!requireContext().isLocationEnabled()){
-                            showLocationSettingsDialog(requireContext())
-                            return@setOnClickListener
-                        }
-                    }
-                    viewModel.inputEmail=viewModel.inputEmail!!.trim()
-                    viewModel.inputPassword=viewModel.inputPassword!!.trim()
-                    progressDialog.start("Loading...")
-                    FBase.getFireBaseAuth().signInWithEmailAndPassword(viewModel.inputEmail!!,viewModel.inputPassword!!).addOnSuccessListener {
-                        if(!FBase.getCurrentUser()!!.isEmailVerified)
-                        {
-                            progressDialog.stop()
-                            Toast.makeText(requireContext(),"Please Verify your email", Toast.LENGTH_SHORT).show()
-                            return@addOnSuccessListener
-                        }
-                        /*viewModel.userData.observe(viewLifecycleOwner) { userData ->
-                                MainScope().launch(Dispatchers.IO)
-                                {
-                                }
-                            }*/
-                        if(FBase.getCurrentUser()!=null)
-                        {
-                            /*viewModel.fetchUserData()*/
-                            MainScope().launch(Dispatchers.IO) {
-                                try{
-                                    sessMan.createSession { sessionID ->
-                                        progressDialog.stop()
-                                        if(sessionID!=null){
-                                            Intent(requireActivity(),HomeActivity::class.java).apply {
-                                                startActivity(this)
-                                            }
-                                            requireActivity().finish()
-                                        }
-                                    }
-                                }
-                                catch (ex:Exception)
-                                {
-                                    progressDialog.stop()
-                                    FirebaseAuth.getInstance().signOut()
-                                }
-                            }
-                        }
-                        else{
-                            progressDialog.stop()
-                            return@addOnSuccessListener
-                        }
-                    }.addOnFailureListener {
-                        progressDialog.stop()
-                        HandleException.firebaseCommonExceptions(requireContext(),it,tag)
-                    }.addOnCanceledListener {
-                        progressDialog.stop()
-                    }
+                val email = binding.fragmentLoginEmailTextInputEditText.text.toString().trim()
+                val password = binding.fragmentLoginPasswordTextInputEditText.text.toString().trim()
 
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    FBase.getFireBaseAuth().signInWithEmailAndPassword(email, password)
+                        .addOnSuccessListener { authResult ->
+                            val user = authResult.user
+                            if (user != null) {
+                                Intent(requireActivity(), HomeActivity::class.java).apply {
+                                    startActivity(this)
+                                    requireActivity().finish()
+                                }
+                            } else {
+                                Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(requireContext(), "Authentication failed: ${it.message}", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    Toast.makeText(requireContext(), "Please enter email and password", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -321,6 +271,4 @@ class LoginFragment : Fragment() {
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }
-
-
 }

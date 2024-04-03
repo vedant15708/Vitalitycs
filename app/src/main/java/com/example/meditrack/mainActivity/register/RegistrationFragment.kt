@@ -238,71 +238,118 @@ class RegistrationFragment : Fragment() {
             })
 
             fragmentRegistrationRegisterButton.setOnClickListener {
-
-                if(validateUserInput()){
+                if (validateUserInput()) {
                     viewModel.inputEmail = viewModel.inputEmail!!.trim()
                     viewModel.inputPassword = viewModel.inputPassword!!.trim()
                     viewModel.inputName = viewModel.inputName!!.trim().uppercase()
                     viewModel.inputSurname = viewModel.inputSurname!!.trim().uppercase()
                     progressDialog.start("Loading...")
-                    FBase.getFireBaseAuth().createUserWithEmailAndPassword(viewModel.inputEmail!!,viewModel.inputPassword!!).addOnCompleteListener {
-                        if(it.isSuccessful)
-                        {
-                            MainScope().launch(Dispatchers.IO) {
-                                try{
-                                    //var imageString:String? = null
-                                    if(inputProfileImage!=null){
-                                        val imageUri = inputProfileImage!!.toUri(requireContext())
-                                        uploadImageToFirebaseStorage(it.result?.user!!.uid,imageUri!!, object :
-                                            AddMedicineFragment.UploadCallback {
+
+                    FBase.getFireBaseAuth().createUserWithEmailAndPassword(viewModel.inputEmail!!, viewModel.inputPassword!!)
+                        .addOnCompleteListener { createTask ->
+                            if (createTask.isSuccessful) {
+                                val user = createTask.result?.user
+                                if (user != null) {
+                                    val imageUri = inputProfileImage?.toUri(requireContext())
+                                    if (imageUri != null) {
+                                        uploadImageToFirebaseStorage(user.uid, imageUri, object : AddMedicineFragment.UploadCallback {
                                             override fun onUploadSuccess(downloadUrl: String) {
-                                                try {
-                                                    val user = UserData(viewModel.inputName!!, viewModel.inputSurname!!, viewModel.inputEmail!!,downloadUrl)
-                                                    FBase.getUserReference().child(it.result?.user!!.uid).setValue(user).addOnSuccessListener {
-                                                        FBase.getCurrentUser()?.sendEmailVerification()?.addOnSuccessListener {
-                                                            progressDialog.stop()
-                                                            Toast.makeText(requireContext(),"Verify Your Email",Toast.LENGTH_SHORT).show()
-                                                            findNavController().navigate(R.id.loginFragment)
-                                                        }?.addOnFailureListener {exception->
-                                                            progressDialog.stop()
-                                                            Log.i(tag,exception.toString())
-                                                            Toast.makeText(requireContext(),exception.toString(),Toast.LENGTH_SHORT).show()
-                                                        }
-                                                    }.addOnFailureListener{exception->
-                                                        progressDialog.stop()
-                                                        Log.i(tag,exception.toString())
-                                                        Toast.makeText(requireActivity(),exception.toString(),Toast.LENGTH_SHORT).show()
+                                                val userDataObject = UserData(
+                                                    viewModel.inputName!!,
+                                                    viewModel.inputSurname!!,
+                                                    viewModel.inputEmail!!,
+                                                    downloadUrl
+                                                )
+                                                FBase.getUserReference().child(user.uid).setValue(userDataObject)
+                                                    .addOnSuccessListener {
+                                                        user.sendEmailVerification()
+                                                            .addOnSuccessListener {
+                                                                progressDialog.stop()
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Verification email sent. Please check your inbox.",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                                findNavController().navigate(R.id.loginFragment)
+                                                            }
+                                                            .addOnFailureListener { exception ->
+                                                                progressDialog.stop()
+                                                                Log.i(tag, exception.toString())
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    exception.toString(),
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            }
                                                     }
-                                                }
-                                                catch (ex:java.lang.Exception)
-                                                {
-                                                    progressDialog.stop()
-                                                }
+                                                    .addOnFailureListener { exception ->
+                                                        progressDialog.stop()
+                                                        Log.i(tag, exception.toString())
+                                                        Toast.makeText(
+                                                            requireActivity(),
+                                                            exception.toString(),
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
                                             }
 
                                             override fun onUploadFailure(exception: Exception) {
                                                 progressDialog.stop()
-                                                Toast.makeText(requireContext(),"onUploadFailure: Error",Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "onUploadFailure: Error",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                             }
                                         })
-                                        //imageString = bitmapToBase64(inputProfileImage!!)
+                                    } else {
+                                        // No profile image provided, skip the upload process
+                                        val userDataObject = UserData(
+                                            viewModel.inputName!!,
+                                            viewModel.inputSurname!!,
+                                            viewModel.inputEmail!!,
+                                            ""
+                                        )
+                                        FBase.getUserReference().child(user.uid).setValue(userDataObject)
+                                            .addOnSuccessListener {
+                                                user.sendEmailVerification()
+                                                    .addOnSuccessListener {
+                                                        progressDialog.stop()
+                                                        Toast.makeText(
+                                                            requireContext(),
+                                                            "Verification email sent. Please check your inbox.",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                        findNavController().navigate(R.id.loginFragment)
+                                                    }
+                                                    .addOnFailureListener { exception ->
+                                                        progressDialog.stop()
+                                                        Log.i(tag, exception.toString())
+                                                        Toast.makeText(
+                                                            requireContext(),
+                                                            exception.toString(),
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
+                                            }
+                                            .addOnFailureListener { exception ->
+                                                progressDialog.stop()
+                                                Log.i(tag, exception.toString())
+                                                Toast.makeText(
+                                                    requireActivity(),
+                                                    exception.toString(),
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
                                     }
-
                                 }
-                                catch (ex:Exception)
-                                {
-                                    Log.e(tag,"RegistrationFragment.kt -> click event fragmentRegistrationRegisterButton -> $ex")
-                                    Toast.makeText(requireActivity(),"Error!",Toast.LENGTH_SHORT).show()
-                                }
-
                             }
                         }
-                    }.addOnFailureListener {
-                        progressDialog.stop()
-                        HandleException.firebaseCommonExceptions(requireContext(),it,tag)
-                    }
+                        .addOnFailureListener {
+                            progressDialog.stop()
+                            HandleException.firebaseCommonExceptions(requireContext(), it, tag)
+                        }
                 }
-
             }
 
             profileImage.setOnClickListener {
