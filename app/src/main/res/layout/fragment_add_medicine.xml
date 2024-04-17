@@ -101,7 +101,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:helperTextEnabled="true"
-                        app:helperText="Required"
+                        app:helperText="*Required"
+                        app:helperTextTextColor="@color/red"
                         style="@style/normalTextBox">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/fragment_medicine_name_TextInputEditText"
@@ -164,7 +165,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:helperTextEnabled="true"
-                        app:helperText="Required"
+                        app:helperText="*Required"
+                        app:helperTextTextColor="@color/red"
                         style="@style/normalTextBox">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/fragment_dosage_info_TextInputEditText"
@@ -201,7 +203,8 @@
                             android:layout_height="wrap_content"
                             style="@style/normalTextBox"
                             app:helperTextEnabled="true"
-                            app:helperText="Required"
+                            app:helperText="*Required"
+                            app:helperTextTextColor="@color/red"
                             android:layout_marginTop="@dimen/_3sdp"
                             android:layout_weight="1">
 
@@ -226,7 +229,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
                             app:helperTextEnabled="true"
-                            app:helperText="Required"
+                            app:helperText="*Required"
+                            app:helperTextTextColor="@color/red"
                             style="@style/normalTextBox"
                             android:layout_marginTop="@dimen/_3sdp"
                             android:layout_weight="1">
@@ -538,7 +542,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:helperTextEnabled="true"
-                        app:helperText="Required"
+                        app:helperText="*Required"
+                        app:helperTextTextColor="@color/red"
                         style="@style/normalTextBox"
                         android:layout_marginTop="@dimen/_12sdp">
                         <com.google.android.material.textfield.TextInputEditText

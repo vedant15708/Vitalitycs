@@ -650,7 +650,7 @@ class AddMedicineFragment : Fragment() {
                                             )
 
 
-                                            medicineDataDocRef.document(docName).set(medicineData!!)
+                                            medicineDataDocRef.document("medicine_data").set(medicineData!!)
                                                 .addOnSuccessListener {
                                                     insertMedicineDataFirebaseCallback.onSuccess()
                                                 }

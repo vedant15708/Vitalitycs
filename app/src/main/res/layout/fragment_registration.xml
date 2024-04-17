@@ -57,15 +57,6 @@
                     android:textSize="@dimen/_30sdp"
                     android:fontFamily="@font/comfortaa_bold"
                     style="@style/LoginHead"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:text="@string/fragment_registration_subtitle"
-                    android:textSize="@dimen/_10sdp"
-                    android:fontFamily="@font/comfortaa_regular"
-                    style="@style/LoginSubHead"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/profile_image_layout"
@@ -101,7 +92,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:helperTextEnabled="true"
-                        app:helperText="Required"
+                        app:helperText="*Required"
+                        app:helperTextTextColor="@color/red"
                         style="@style/normalTextBox"
                         >
                         <com.google.android.material.textfield.TextInputEditText
@@ -125,7 +117,8 @@
                         android:layout_weight="1"
                         android:layout_marginStart="5dp"
                         app:helperTextEnabled="true"
-                        app:helperText="Required"
+                        app:helperText="*Required"
+                        app:helperTextTextColor="@color/red"
                         style="@style/normalTextBox">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -155,7 +148,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:helperTextEnabled="true"
-                    app:helperText="Required"
+                    app:helperText="*Required"
+                    app:helperTextTextColor="@color/red"
                     style="@style/normalTextBox"
                     android:layout_marginTop="@dimen/_3sdp">
 
@@ -187,7 +181,8 @@
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true"
                     app:helperTextEnabled="true"
-                    app:helperText="Required"
+                    app:helperText="*Required"
+                    app:helperTextTextColor="@color/red"
                     style="@style/normalTextBox"
                     android:layout_marginTop="@dimen/_3sdp">
 
@@ -212,7 +207,8 @@
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true"
                     app:helperTextEnabled="true"
-                    app:helperText="Required"
+                    app:helperText="*Required"
+                    app:helperTextTextColor="@color/red"
                     style="@style/normalTextBox"
                     android:layout_marginTop="@dimen/_3sdp">
 

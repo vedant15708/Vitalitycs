@@ -56,16 +56,6 @@
                     android:textSize="@dimen/_30sdp"
                     android:textStyle="bold"
                     style="@style/LoginHead"/>
-                <TextView
-                    android:id="@+id/fragment_login_subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:text="@string/fragment_login_subtitle"
-                    android:textSize="@dimen/_10sdp"
-                    android:fontFamily="@font/comfortaa_regular"
-                    style="@style/LoginSubHead"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
