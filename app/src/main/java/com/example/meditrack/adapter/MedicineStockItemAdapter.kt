@@ -79,7 +79,10 @@ class MedicineStockItemAdapter(private val mList: List<ItemsViewModel>) : Recycl
         val calendar = Calendar.getInstance()
         val currentHour = calendar.get(Calendar.MONTH)
         val currentYear = calendar.get(Calendar.YEAR)
-        val currentMonth = calendar.get(Calendar.MONTH)
+        val currentMonth = calendar.get(Calendar.MONTH) + 1 // as get(Calendar.MONTH) gives JAN as 0
+
+
+        Log.d("MYTAG","current Month $currentMonth")
 
         var month: String = ""
         var year: String = ""
@@ -93,18 +96,60 @@ class MedicineStockItemAdapter(private val mList: List<ItemsViewModel>) : Recycl
 
 
 
-        if(month.toInt() == currentMonth &&  year.toInt() == currentYear){
-            holder.expiryTime.text = "Expired In this Month"
-        } else if(year.toInt() > currentYear){
-            var totalYear: Int = year.toInt() - currentYear
-            var totalMonth =  (12 - currentMonth)
-            Log.i("TAG", "onBindViewHolder: $totalMonth")
-            holder.expiryTime.text = totalYear.toString()+" Year "+totalMonth.toString() + " Month"
-        } else if(year.toInt() == currentYear){
-            if(currentMonth < month.toInt()){
-                holder.expiryTime.text = (12 - month.toInt()).toString() + " Month"
+//        if(month.toInt() == currentMonth &&  year.toInt() == currentYear){
+//            holder.expiryTime.text = "Expired In this Month"
+//        } else if(year.toInt() > currentYear){
+//            var totalYear: Int = year.toInt() - currentYear
+//            var totalMonth =  (12 - currentMonth)
+//            Log.i("TAG", "onBindViewHolder: $totalMonth")
+//            holder.expiryTime.text = totalYear.toString()+" Year "+totalMonth.toString() + " Month"
+//        } else if(year.toInt() == currentYear){
+//            if(currentMonth < month.toInt()){
+////                holder.expiryTime.text = (12 - month.toInt()).toString() + " Month"
+//                holder.expiryTime.text = "${month.toInt() - currentMonth} Month"
+//            }else{
+//                holder.expiryTime.text = "Expired"
+//            }
+//        }else if(year.toInt()<currentYear){
+//            holder.expiryTime.text = "Expired"
+//        }
+        val remainingYears = year.toInt() - currentYear
+        val remainingMonths = month.toInt() - currentMonth
+        val expiryText = when {
+            year.toInt() > currentYear -> {
+                // Expiry is in a future year
+                if (remainingMonths < 0) {
+                    remainingYears - 1 to (12 + remainingMonths)
+                } else {
+                    remainingYears to remainingMonths
+                }
+            }
+            year.toInt() == currentYear -> {
+                // Expiry is in the current year
+                if (month.toInt() > currentMonth) {
+                    month.toInt() - currentMonth to 0
+                } else {
+                    // Already expired this month
+                    0 to 0
+                }
+            }
+            else -> {
+                // Expiry is in a past year
+                0 to 0
             }
         }
+
+// Generate the expiry time message based on the remaining time
+        val (years, months) = expiryText
+        val expiryMessage = when {
+            years == 0 && months == 0 -> "Expired"
+            years == 0 -> "${months} Month${if (months > 1) "s" else ""}"
+            months == 0 -> "${years} Year${if (years > 1) "s" else ""}"
+            else -> "${years} Year${if (years > 1) "s" else ""} ${months} Month${if (months > 1) "s" else ""}"
+        }
+
+// Set the expiry time message to your TextView
+        holder.expiryTime.text = expiryMessage
 
     }
 

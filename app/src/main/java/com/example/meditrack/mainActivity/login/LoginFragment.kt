@@ -35,6 +35,7 @@ import com.example.meditrack.utility.ownDialogs.CustomProgressDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
+import java.lang.Exception
 
 
 class LoginFragment : Fragment() {
@@ -189,9 +190,13 @@ class LoginFragment : Fragment() {
                         .addOnSuccessListener { authResult ->
                             val user = authResult.user
                             if (user != null) {
-                                Intent(requireActivity(), HomeActivity::class.java).apply {
-                                    startActivity(this)
-                                    requireActivity().finish()
+                                try {
+                                    Intent(requireActivity(), HomeActivity::class.java).apply {
+                                        startActivity(this)
+                                        requireActivity().finish()
+                                    }
+                                }catch (_:Exception){
+
                                 }
                             } else {
                                 Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT).show()

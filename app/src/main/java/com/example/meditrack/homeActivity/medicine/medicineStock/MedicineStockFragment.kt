@@ -261,12 +261,14 @@ class MedicineStockFragment : Fragment() {
         medicineAdapter.notifyDataSetChanged()
         medicineDataRef.get()
             .addOnSuccessListener { querySnapshot ->
+                Log.d("MYTAG","addonSuccessListener ${querySnapshot.isEmpty} ${querySnapshot.size()}")
                 when(filter){
                     "INVENTORY" ->{
 //                        medicineList.clear()
                         medicineAdapter.notifyDataSetChanged()
                         for (document in querySnapshot) {
-                            if((document.get("mediDeleted").toString() == "No" || document.get("mediDeleted").toString() == "NO") && !isExpired(document.get("expDate").toString())){
+                                if((document.get("mediDeleted").toString() == "No" || document.get("mediDeleted").toString() == "NO") && !isExpired(document.get("expDate").toString())){
+                                Log.d("MYTAG", "if part")
                                 medicineList.add(ItemsViewModel(
                                     document.id,document.get("medName").toString(),
                                     document.get("expDate").toString(),
@@ -277,8 +279,11 @@ class MedicineStockFragment : Fragment() {
                                 if(currentSortType == SortType.ALPHABETICAL){
                                     medicineList.sortBy { it.medicine_name }
                                 }
+                                Log.d("MYTAG", medicineList.toString())
                                 updateRecyclerView(medicineList)
                                 medicineAdapter.notifyDataSetChanged()
+                            }else{
+                                Log.d("MYTAG", "else part")
                             }
                         }
                     }

@@ -37,6 +37,7 @@ import com.example.meditrack.utility.UtilsFunctions.Companion.showToast
 import com.example.meditrack.utility.UtilsFunctions.Companion.toByteArray
 import com.example.meditrack.utility.ownDialogs.CustomProgressDialog
 import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
@@ -226,7 +227,7 @@ class OCRFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallbac
 
         cameraExecutor = Executors.newSingleThreadExecutor()
         val options = TextRecognizerOptions.DEFAULT_OPTIONS
-        val recognizer: TextRecognizer = TextRecognition.getClient(options);
+         recognizer = TextRecognition.getClient(options);
 
 
         // Request camera permissions
@@ -336,10 +337,7 @@ class OCRFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallbac
         val chunkSize = 2
         val inputImage = InputImage.fromBitmap(bitmap,0)
 
-        recognizer
-            .process(inputImage)
-            .addOnSuccessListener { text ->
-                viewModel.listSelectedMedName = ArrayList()
+        recognizer.process(inputImage).addOnSuccessListener { text ->viewModel.listSelectedMedName = ArrayList()
                 val rectList: ArrayList<Pair<RectF, String>> = ArrayList()
                 val job1 = MainScope().launch(Dispatchers.IO) {
 
@@ -417,7 +415,8 @@ class OCRFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallbac
                 overlayView.setBoundingRects(rectList)
                 binding.textInImageLayout.visibility = View.VISIBLE
                 processTextRecognitionResult(text)*/
-
+                binding.textInImageLayout.visibility = View.VISIBLE
+                processTextRecognitionResult(text)
             }.addOnFailureListener { e ->
                 e.printStackTrace()
                 requireContext().showToast(e.localizedMessage ?: getString(R.string.error_default_msg))
@@ -425,7 +424,7 @@ class OCRFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallbac
     }
 
 
-    /*private fun processTextRecognitionResult(result: Text) {
+    private fun processTextRecognitionResult(result: Text) {
         var finalText = ""
         for (block in result.textBlocks) {
             for (line in block.lines) {
@@ -434,8 +433,8 @@ class OCRFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallbac
             finalText += "\n"
         }
 
-        Log.d(TAG, finalText)
-        Log.d(TAG, result.text)
+//        Log.d(TAG, finalText)
+//        Log.d(TAG, result.text)
 
         binding.textInImage.text = if (finalText.isNotEmpty()) {
             finalText
@@ -443,12 +442,12 @@ class OCRFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallbac
             getString(R.string.no_text_found)
         }
 
-        Linkify.addLinks(
+       /* Linkify.addLinks(
             binding.textInImage,
             Linkify.WEB_URLS or Linkify.EMAIL_ADDRESSES or Linkify.PHONE_NUMBERS
-        )
+        )*/
 
-    }*/
+    }
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireActivity())
