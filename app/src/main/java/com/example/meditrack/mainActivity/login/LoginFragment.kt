@@ -190,13 +190,31 @@ class LoginFragment : Fragment() {
                         .addOnSuccessListener { authResult ->
                             val user = authResult.user
                             if (user != null) {
-                                try {
-                                    Intent(requireActivity(), HomeActivity::class.java).apply {
-                                        startActivity(this)
-                                        requireActivity().finish()
+//                                try {
+//                                    Intent(requireActivity(), HomeActivity::class.java).apply {
+//                                        startActivity(this)
+//                                        requireActivity().finish()
+//                                    }
+//                                }catch (_:Exception){
+//
+//                                }
+                                MainScope().launch(Dispatchers.IO) {
+                                    try{
+                                        sessMan.createSession { sessionID ->
+                                            progressDialog.stop()
+                                            if(sessionID!=null){
+                                                Intent(requireActivity(),HomeActivity::class.java).apply {
+                                                    startActivity(this)
+                                                }
+                                                requireActivity().finish()
+                                            }
+                                        }
                                     }
-                                }catch (_:Exception){
-
+                                    catch (ex:Exception)
+                                    {
+                                        progressDialog.stop()
+                                        FirebaseAuth.getInstance().signOut()
+                                    }
                                 }
                             } else {
                                 Toast.makeText(requireContext(), "Authentication failed", Toast.LENGTH_SHORT).show()

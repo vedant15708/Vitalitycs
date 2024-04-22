@@ -651,7 +651,14 @@ AddMedicineFragment : Fragment() {
                                             )
 
 
-                                            medicineDataDocRef.document("medicine_data").set(medicineData!!)
+//                                            medicineDataDocRef.document("medicine_data").set(medicineData!!)
+//                                                .addOnSuccessListener {
+//                                                    insertMedicineDataFirebaseCallback.onSuccess()
+//                                                }
+//                                                .addOnFailureListener { e ->
+//                                                    insertMedicineDataFirebaseCallback.onFailure(e)
+//                                                }
+                                            medicineDataDocRef.add(medicineData!!)
                                                 .addOnSuccessListener {
                                                     insertMedicineDataFirebaseCallback.onSuccess()
                                                 }

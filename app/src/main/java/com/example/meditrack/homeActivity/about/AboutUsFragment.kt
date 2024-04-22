@@ -16,6 +16,7 @@ import com.example.meditrack.firebase.FBase
 import com.example.meditrack.homeActivity.HomeActivity
 import com.example.meditrack.utility.ownDialogs.CustomProgressDialog
 import kotlinx.coroutines.*
+import java.lang.Exception
 
 class AboutUsFragment : Fragment() {
 
@@ -57,55 +58,109 @@ class AboutUsFragment : Fragment() {
                 val teamMemberDetailsDocument = aboutUsCollectionRef.document("team_member_details")
 
                 launch {
-                    aboutProjectDetailsDocument.addSnapshotListener { value, error ->
-                        if (error != null) {
-                            Toast.makeText(requireContext(),"Error",Toast.LENGTH_SHORT).show()
-                            Log.e("aboutProjectDetailsDocument.addSnapshotListener","${error.message}")
-                            // Handle any errors
-                            return@addSnapshotListener
-                        }
+//                    aboutProjectDetailsDocument.addSnapshotListener { value, error ->
+//                        if (error != null) {
+//                            Toast.makeText(requireContext(),"Error",Toast.LENGTH_SHORT).show()
+//                            Log.e("aboutProjectDetailsDocument.addSnapshotListener","${error.message}")
+//                            // Handle any errors
+//                            return@addSnapshotListener
+//                        }
+//
+//                        if (value != null) {
+//                            Log.d("MYTAG", "${value.get("data")}")
+//                            viewModel.setAboutProjectDetails(value.get("data") as String)
+//                        } else {
+//                            Toast.makeText(requireContext(),"about_us collection is empty",Toast.LENGTH_SHORT).show()
+//                            // Handle the case when the collection is empty
+//                        }
+//                    }
 
-                        if (value != null) {
-                            viewModel.setAboutProjectDetails(value.get("data") as String)
-                        } else {
-                            Toast.makeText(requireContext(),"about_us collection is empty",Toast.LENGTH_SHORT).show()
-                            // Handle the case when the collection is empty
+                    aboutProjectDetailsDocument.get().addOnSuccessListener {document->
+                        document.get("data")
+                        try{
+                            Log.d("MYTAG", "${document.get("data")}")
+                            if (document.get("data") != null) {
+                            Log.d("MYTAG", "${document.get("data")}")
+                            viewModel.setAboutProjectDetails(document.get("data") as String)
+                            } else {
+                                Toast.makeText(requireContext(),"about_us collection is empty",Toast.LENGTH_SHORT).show()
+                                // Handle the case when the collection is empty
+                            }
+                        }catch (_:Exception){
+
                         }
+                    }.addOnFailureListener { exception ->
+                        Log.d("TAG", "get failed with ", exception)
                     }
                 }
-                launch {
-                    collegeDetailsDocument.addSnapshotListener { value, error ->
-                        if (error != null) {
-                            Toast.makeText(requireContext(),"Error",Toast.LENGTH_SHORT).show()
-                            Log.e("collegeDetailsDocument.addSnapshotListener","${error.message}")
-                            // Handle any errors
-                            return@addSnapshotListener
-                        }
 
-                        if (value != null) {
-                            viewModel.setCollegeDetails(value.get("data") as String)
-                        } else {
-                            Toast.makeText(requireContext(),"about_us collection is empty",Toast.LENGTH_SHORT).show()
-                            // Handle the case when the collection is empty
+                launch {
+//                    collegeDetailsDocument.addSnapshotListener { value, error ->
+//                        if (error != null) {
+//                            Toast.makeText(requireContext(),"Error",Toast.LENGTH_SHORT).show()
+//                            Log.e("collegeDetailsDocument.addSnapshotListener","${error.message}")
+//                            // Handle any errors
+//                            return@addSnapshotListener
+//                        }
+//
+//                        if (value != null) {
+//                            //viewModel.setCollegeDetails(value.get("data") as String)
+//                        } else {
+//                            Toast.makeText(requireContext(),"about_us collection is empty",Toast.LENGTH_SHORT).show()
+//                            // Handle the case when the collection is empty
+//                        }
+//                    }
+                    collegeDetailsDocument.get().addOnSuccessListener {document->
+                        document.get("data")
+                        try{
+                            Log.d("MYTAG", "${document.get("data")}")
+                            if (document.get("data") != null) {
+                                Log.d("MYTAG", "${document.get("data")}")
+                                viewModel.setCollegeDetails(document.get("data") as String)
+                            } else {
+                                Toast.makeText(requireContext(),"about_us collection is empty",Toast.LENGTH_SHORT).show()
+                                // Handle the case when the collection is empty
+                            }
+                        }catch (_:Exception){
+
                         }
+                    }.addOnFailureListener { exception ->
+                        Log.d("TAG", "get failed with ", exception)
                     }
                 }
 
                 launch {
-                    teamMemberDetailsDocument.addSnapshotListener { value, error ->
-                        if (error != null) {
-                            Toast.makeText(requireContext(),"Error",Toast.LENGTH_SHORT).show()
-                            Log.e("teamMemberDetailsDocument.addSnapshotListener","${error.message}")
-                            // Handle any errors
-                            return@addSnapshotListener
-                        }
+//                    teamMemberDetailsDocument.addSnapshotListener { value, error ->
+//                        if (error != null) {
+//                            Toast.makeText(requireContext(),"Error",Toast.LENGTH_SHORT).show()
+//                            Log.e("teamMemberDetailsDocument.addSnapshotListener","${error.message}")
+//                            // Handle any errors
+//                            return@addSnapshotListener
+//                        }
+//
+//                        if (value != null) {
+//                            //viewModel.setTeamMemberDetailsData(value.get("data") as String)
+//                        } else {
+//                            Toast.makeText(requireContext(),"about_us collection is empty",Toast.LENGTH_SHORT).show()
+//                            // Handle the case when the collection is empty
+//                        }
+//                    }
+                    teamMemberDetailsDocument.get().addOnSuccessListener {document->
+                        document.get("data")
+                        try{
+                            Log.d("MYTAG", "${document.get("data")}")
+                            if (document.get("data") != null) {
+                                Log.d("MYTAG", "${document.get("data")}")
+                                viewModel.setTeamMemberDetailsData(document.get("data") as String)
+                            } else {
+                                Toast.makeText(requireContext(),"about_us collection is empty",Toast.LENGTH_SHORT).show()
+                                // Handle the case when the collection is empty
+                            }
+                        }catch (_:Exception){
 
-                        if (value != null) {
-                            viewModel.setTeamMemberDetailsData(value.get("data") as String)
-                        } else {
-                            Toast.makeText(requireContext(),"about_us collection is empty",Toast.LENGTH_SHORT).show()
-                            // Handle the case when the collection is empty
                         }
+                    }.addOnFailureListener { exception ->
+                        Log.d("TAG", "get failed with ", exception)
                     }
                 }
 
