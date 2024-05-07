@@ -3,45 +3,73 @@ package com.example.meditrack.homeActivity.reminder.notification
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.LayoutRes
+import com.google.firebase.auth.FirebaseAuth
 import androidx.fragment.app.DialogFragment
 import com.example.meditrack.R
 import com.example.meditrack.homeActivity.reminder.recevier.ReminderReceiver
 import com.example.meditrack.utility.UtilsFunctions.Companion.TIME_FORMAT
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.properties.Delegates
 
 class MedicineReminderDialog(val reqActivity: Activity): DialogFragment() {
     private lateinit var dialog: View
-//    private lateinit var timePickerDialog: TimePickerDialog
+    //    private lateinit var timePickerDialog: TimePickerDialog
     private var notfiHour by Delegates.notNull<Int>()
     private var notfiMin by Delegates.notNull<Int>()
     private lateinit var reminderTimeEditText: TextView
     private val selectedDays = mutableListOf<Int>()
+    private lateinit var authStateListener: FirebaseAuth.AuthStateListener
+    private lateinit var firestore: FirebaseFirestore
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Initialize Firestore
+        firestore = Firebase.firestore
+        authStateListener = FirebaseAuth.AuthStateListener { firebaseAuth ->
+            val user = firebaseAuth.currentUser
+            if (user != null) {
+                // User is signed in
+                // However, don't call retrieveMedicinesFromFirestore() here
+            } else {
+                // No user is signed in, handle the case accordingly
+                Log.e("Firestore", "No user is signed in")
+            }
+        }
+        FirebaseAuth.getInstance().addAuthStateListener(authStateListener)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val inflater = reqActivity.layoutInflater
         dialog = inflater.inflate(R.layout.addmedicine_reminder_dialogbox_layout, null)
 
-//        val desiredWidth = resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._200sdp)
-//        val layoutParams = ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
-//        dialog.layoutParams = layoutParams
-
-        val medicineName: TextInputEditText = dialog.findViewById(R.id.add_medi_name_editText)
-        reminderTimeEditText = dialog.findViewById(R.id.showSetReminderTime)
+        val medicineSpinner = dialog.findViewById<Spinner>(R.id.medicineSpinner)
         val addMediReminderTime: Button = dialog.findViewById(R.id.add_medicine_timePicker_btn)
 
+        // Check if the user is signed in before retrieving medicines
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            retrieveMedicinesFromFirestore(medicineSpinner)
+        }
         // Open the Time Picker, when click on the button
         addMediReminderTime.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -90,10 +118,10 @@ class MedicineReminderDialog(val reqActivity: Activity): DialogFragment() {
         builder.setView(dialog)
             .setTitle("Medicine Reminder")
             .setPositiveButton("Set Reminder") { dialog, which ->
-                // Get the selected time from the TimePicker
+                val selectedMedicineName = medicineSpinner.selectedItem.toString()
                 Log.i("TAG", "positiveBtn: $selectedDays")
                 // Schedule the notification
-                scheduleNotifications(medicineName.text.toString(), selectedDays, notfiHour, notfiMin)
+                scheduleNotifications(selectedMedicineName, selectedDays, notfiHour, notfiMin)
                 // Dismiss the dialog
                 dialog.dismiss()
                 Toast.makeText(reqActivity, "Reminder Successfully set", Toast.LENGTH_SHORT).show()
@@ -127,10 +155,14 @@ class MedicineReminderDialog(val reqActivity: Activity): DialogFragment() {
         calendar.set(Calendar.MINUTE, Min)
         val sdf = SimpleDateFormat(TIME_FORMAT, Locale.getDefault()) // Format for 12-hour time with AM/PM
         val formattedTime = sdf.format(calendar.time)
-        reminderTimeEditText.text = formattedTime
     }
 
-    fun scheduleNotifications(medicineName: String, days: MutableList<Int> = mutableListOf(), notfiHr: Int, notfiMin: Int) {
+    fun scheduleNotifications(
+        medicineName: String,
+        days: MutableList<Int> = mutableListOf(),
+        notfiHr: Int,
+        notfiMin: Int
+    ) {
         val now = Calendar.getInstance()
         Log.i("TAG", "scheduleNotifications: days = $days")
         Log.i("TAG", "scheduleNotifications: hour =  $notfiHr")
@@ -139,7 +171,7 @@ class MedicineReminderDialog(val reqActivity: Activity): DialogFragment() {
             // Calculate the next occurrence of the selected day
             val nextOccurrence = calculateNextOccurrence(day, now, notfiHr, notfiMin)
             scheduleNotification(
-                "Reminder to take $medicineName Medicine",
+                "Reminder to take $medicineName",
                 nextOccurrence.get(Calendar.DAY_OF_WEEK),
                 notfiHr,
                 notfiMin
@@ -166,6 +198,115 @@ class MedicineReminderDialog(val reqActivity: Activity): DialogFragment() {
 
         return nextOccurrence
     }
+//    private fun retrieveMedicinesFromFirestore(medicineSpinner: Spinner) {
+//        val currentUser = FirebaseAuth.getInstance().currentUser
+//        if (currentUser != null) {
+//            val userDocRef = firestore.collection("users_data").document(currentUser.uid)
+//
+//            // Query the "medicine_data" subcollection within the user's document
+//            userDocRef.collection("medicine_data")
+//                .get()
+//                .addOnSuccessListener { querySnapshot ->
+//                    val medicineList = mutableListOf<String>()
+//                    for (document in querySnapshot) {
+//                        val medicineName = document.getString("medname") ?: ""
+//                        medicineList.add(medicineName)
+//                    }
+//                    populateSpinner(medicineList, medicineSpinner)
+//                }
+//                .addOnFailureListener { exception ->
+//                    Log.e("Firestore", "Error retrieving medicines: $exception")
+//                    // Handle error
+//                }
+//        } else {
+//            // No user is signed in, handle the case accordingly
+//            Log.e("Firestore", "No user is signed in")
+//        }
+//    }
+
+
+
+
+    private fun retrieveMedicinesFromFirestore(medicineSpinner: Spinner) {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            val userDocRef = firestore.collection("users_data").document(currentUser.uid)
+
+            // Query the "medicine_data" subcollection within the user's document
+            userDocRef.collection("medicine_data")
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    val medicineList = mutableListOf<String>()
+                    for (document in querySnapshot) {
+                        val medicineName = document.getString("medName")
+                        if (!medicineName.isNullOrEmpty()) {
+                            medicineList.add(medicineName)
+                        }
+                    }
+                    populateSpinner(medicineList, medicineSpinner)
+                }
+                .addOnFailureListener { exception ->
+                    Log.e("Firestore", "Error retrieving medicines: $exception")
+                    // Handle error
+                }
+        } else {
+            // No user is signed in, handle the case accordingly
+            Log.e("Firestore", "No user is signed in")
+        }
+    }
+
+    private fun populateSpinner(medicineList: List<String>, medicineSpinner: Spinner) {
+        val adapter = MedicineSpinnerAdapter(requireContext(), android.R.layout.simple_spinner_item, medicineList)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        medicineSpinner.adapter = adapter
+    }
+
+//   private class MedicineSpinnerAdapter(
+//        context: Context,
+//        @LayoutRes private val layoutResource: Int,
+//        private val medicineList: List<String>
+//    ) : ArrayAdapter<String>(context, layoutResource, medicineList) {
+//
+//        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+//            val view = super.getView(position, convertView, parent)
+//            val textView = view.findViewById<TextView>(android.R.id.text1)
+//            textView.text = medicineList[position]
+//            return view
+//        }
+//
+//        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+//            val view = super.getDropDownView(position, convertView, parent)
+//            val textView = view.findViewById<TextView>(android.R.id.text1)
+//            textView.text = medicineList[position]
+//            return view
+//        }
+//    }
+
+    private class MedicineSpinnerAdapter(
+        context: Context,
+        @LayoutRes private val layoutResource: Int,
+        private val medicineList: List<String>
+    ) : ArrayAdapter<String>(context, layoutResource, medicineList) {
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = super.getView(position, convertView, parent) as TextView
+            view.setTextColor(Color.WHITE) // Set a contrasting color
+            view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f) // Set a visible text size
+            view.text = medicineList[position]
+            return view
+        }
+
+        override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+            val view = super.getDropDownView(position, convertView, parent) as TextView
+            view.setTextColor(Color.BLACK) // Set a contrasting color
+            view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f) // Set a visible text size
+            view.text = medicineList[position]
+            return view
+        }
+    }
+
+
+
 
 
     private fun scheduleNotification(content: String, dayOfWeek: Int, hour: Int, minute: Int) {
@@ -174,20 +315,25 @@ class MedicineReminderDialog(val reqActivity: Activity): DialogFragment() {
         intent.putExtra("title", "Medicine Reminder")
         intent.putExtra("content", content)
 
-
-        val pendingIntent = PendingIntent.getBroadcast(
-            reqActivity,
-            Random().nextInt(),
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(
+                reqActivity,
+                Random().nextInt(),
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        } else {
+            PendingIntent.getBroadcast(
+                reqActivity,
+                Random().nextInt(),
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
 
         // Get an instance of the AlarmManager
         val alarmManager = reqActivity.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-//        Log.i("TAG", "scheduleNotification: $dayOfWeek")
-//        Log.i("TAG", "scheduleNotification: $hour")
-//        Log.i("TAG", "scheduleNotification: $minute")
         // Calculate the time in milliseconds
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek)
@@ -198,6 +344,10 @@ class MedicineReminderDialog(val reqActivity: Activity): DialogFragment() {
 
         // Set the notification to appear at the specified time
         alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pendingIntent)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        FirebaseAuth.getInstance().removeAuthStateListener(authStateListener)
     }
 
 }

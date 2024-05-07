@@ -61,14 +61,31 @@ class ReminderReceiver : BroadcastReceiver() {
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setAutoCancel(true) // Close the notification when clicked
 
-        val notificationIntent = Intent(context, NotificationFragment::class.java)
-        val pendingIntent = PendingIntent.getActivity(
-            context,
-            notificationId,
-            notificationIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        notificationBuilder.setContentIntent(pendingIntent)
+        val pendingIntent: PendingIntent? = try {
+            val notificationIntent = Intent(context, NotificationFragment::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.getActivity(
+                    context,
+                    notificationId,
+                    notificationIntent,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
+            } else {
+                PendingIntent.getActivity(
+                    context,
+                    notificationId,
+                    notificationIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            }
+        } catch (e: Exception) {
+            Log.e("TAG", "Error creating PendingIntent", e)
+            null
+        }
+
+        if (pendingIntent != null) {
+            notificationBuilder.setContentIntent(pendingIntent)
+        }
 
         // Show the notification
         notificationManager.notify(notificationId, notificationBuilder.build())

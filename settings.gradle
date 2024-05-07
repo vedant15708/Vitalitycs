@@ -16,5 +16,5 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
-rootProject.name = "MediTrack"
+rootProject.name = "Vitalitycs"
 include ':app'

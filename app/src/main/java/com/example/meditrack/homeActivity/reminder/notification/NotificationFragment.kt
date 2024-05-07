@@ -91,6 +91,4 @@ class NotificationFragment : Fragment() {
         (activity as? HomeActivity)?.setNavigationDrawerSelection(R.id.nav_notifications)
     }
 
-
-
 }
