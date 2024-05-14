@@ -290,7 +290,7 @@ class MedicineReminderDialog(val reqActivity: Activity): DialogFragment() {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
             val view = super.getView(position, convertView, parent) as TextView
-            view.setTextColor(Color.WHITE) // Set a contrasting color
+            view.setTextColor(Color.BLACK) // Set a contrasting color
             view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f) // Set a visible text size
             view.text = medicineList[position]
             return view

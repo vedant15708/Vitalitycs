@@ -59,14 +59,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var notificationManager: MediTrackNotificationManager
     private var currentFragment: Fragment? = null
 
-    /*val myToolbarImage: ImageView
-        get() = findViewById(R.id.toolbar_profile_image)*/
-
-    /*fun getToolbarMenuLayout(): ConstraintLayout {
-        return findViewById(R.id.fragment_home_toolbar_menu_layout)
-    }*/
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -293,7 +285,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -301,42 +292,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             super.onBackPressed()
         }
     }
-
-    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
-
-        return true
-    }*/
-
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        when (currentFragment) {
-            is MedicineStockFragment -> menuInflater.inflate(R.menu.medicine_stock_options_menu, menu)
-        }
-        menuInflater.inflate(R.menu.medicine_stock_options_menu, menu)
-        return true
-    }*/
-
-    /*override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_select_all -> {
-                Toast.makeText(this, "Clicked Select all", Toast.LENGTH_SHORT).show()
-                return true
-            }
-            R.id.action_inverse_select -> {
-                Toast.makeText(this, "Clicked Inverse", Toast.LENGTH_SHORT).show()
-                return true
-            }
-            R.id.action_unselect_all -> {
-                Toast.makeText(this, "Clicked Unselect all", Toast.LENGTH_SHORT).show()
-                return true
-            }
-            R.id.action_delete_selection -> {
-                Toast.makeText(this, "Clicked Delete selection", Toast.LENGTH_SHORT).show()
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }*/
 
     private fun loadFragment()
     {
@@ -372,32 +327,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
 
-//            R.id.nav_photos -> {
-//                Toast.makeText(this, "Clicked Photos", Toast.LENGTH_SHORT).show()
-//            }
-//
-//            R.id.nav_movies -> {
-//                Toast.makeText(this, "Clicked Movies", Toast.LENGTH_SHORT).show()
-//            }
 
             R.id.nav_notifications -> {
                 navController.popBackStack(R.id.notificationFragment,false)
                 navController.navigate(R.id.notificationFragment)
             }
 
-//            R.id.nav_settings -> {
-//                Toast.makeText(this, "Clicked Settings", Toast.LENGTH_SHORT).show()
-//            }
-
             R.id.nav_aboutUs -> {
                 navController.popBackStack(R.id.aboutUsFragment,true)
                 navController.navigate(R.id.aboutUsFragment)
                 //Toast.makeText(this, "Clicked About Us", Toast.LENGTH_SHORT).show()
             }
-
-//            R.id.nav_privacyPolicy -> {
-//                Toast.makeText(this, "Clicked Privacy Policy", Toast.LENGTH_SHORT).show()
-//            }
 
             R.id.nav_sign_out->{
 

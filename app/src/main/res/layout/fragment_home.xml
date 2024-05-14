@@ -332,6 +332,66 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/checkHealthReportCard"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_70sdp"
+                    app:cardCornerRadius="7dp"
+                    app:cardElevation="10dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="false"
+                    android:clipToPadding="false"
+                    android:layout_margin="20dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/side_nav_bar">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/checkHealthReportCardView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:elevation="25dp"
+                            >
+                            <ImageView
+                                android:id="@+id/checkHealthReportImgView"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginVertical="10dp"
+                                android:src="@drawable/heartbeat"
+                                />
+                        </androidx.cardview.widget.CardView>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:fontFamily="@font/comfortaa_bold"
+                            android:gravity="center"
+                            android:text="My Health"
+                            style="@style/HomeCardViewText"
+                            android:textSize="@dimen/_10sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/checkHealthReportCardView" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

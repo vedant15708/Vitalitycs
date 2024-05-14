@@ -518,7 +518,7 @@
                                             android:id="@+id/fragment_notes_or_comments_TextInputEditText"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:hint="@string/notesorcomments"
+                                            android:hint="Allergic to"
                                             android:gravity="top"
                                             android:drawableStart="@drawable/round_notes_24"
                                             style="@style/FormTextBox"
