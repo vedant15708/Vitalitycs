@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/my_health_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".homeActivity.medicine.addMedicine.AddMedicineFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/top_right_shape"
+                android:src="@drawable/shape"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="-40dp"
+                android:layout_marginEnd="-40dp"/>
+            <ImageView
+                android:id="@+id/fragment_login_top_shape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/top_right_shape"
+                android:src="@drawable/shape2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="-10dp"
+                android:layout_marginEnd="-70dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginHorizontal="20dp"
+                        android:text="@string/myhealth"
+                        android:textSize="@dimen/_25sdp"
+                        android:fontFamily="@font/comfortaa_bold"
+                        style="@style/LoginHead"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="20dp"
+                    android:paddingVertical="30dp"
+                    android:paddingHorizontal="10dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/fragment_medicine_add_regulardisease"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_gravity="start"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/button_background"
+                        android:fontFamily="@font/comfortaa_bold"
+                        android:text="@string/addregulardisease"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@null"
+                        app:icon="@drawable/round_add_circle_outline_24"
+                        app:iconGravity="textEnd"
+                        app:iconTint="@color/white" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

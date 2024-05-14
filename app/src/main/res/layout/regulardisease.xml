@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Common symptoms"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp" />
+
+            <!-- Checkboxes for common symptoms -->
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Acid reflux"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Back pain"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cramps"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Headaches"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Racing heart"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tiredness"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Abdominal cramps"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Absence of menstruation"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Achilles tendon pain"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Add more checkboxes here -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="More symptoms"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Acne"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Adjustment disorder"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Age regression"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aggression"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aggressive behaviour"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Agitation"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alcohol use"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Allergies"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Allodynia"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alogia"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Anal itching"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Anger"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Angioedema"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ankle pain"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Anosmia"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Anxiety"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Anxious mood"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apathy"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aphasia"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aphonia"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aphtha"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apnoea"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Arm numbness"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Arm pain"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Arrhythmia"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Arthritis"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Arthritis"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Add checkboxes for more symptoms here -->
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp" />
+
+</LinearLayout>
